@@ -24,10 +24,10 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _GradeCalculatorMainPage createState() => _GradeCalculatorMainPage();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _GradeCalculatorMainPage extends State<MyHomePage> {
   double numberGrade = 0;
   String letterGrade;
 
