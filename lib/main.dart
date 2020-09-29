@@ -79,6 +79,7 @@ class _GradeCalculatorMainPage extends State<MyHomePage> {
               },
               min: 0,
               max: 100,
+              divisions: 100,
               label: '$numberGrade',
             ),
             Text(
