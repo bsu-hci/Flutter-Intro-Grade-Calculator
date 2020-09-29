@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(GradeConverterApp());
 }
 
-class MyApp extends StatelessWidget {
+class GradeConverterApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -13,13 +13,13 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Number to Letter Grade Converter'),
+      home: GradeConverterHomePage(title: 'Number to Letter Grade Converter'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class GradeConverterHomePage extends StatefulWidget {
+  GradeConverterHomePage({Key key, this.title}) : super(key: key);
 
   final String title;
 
@@ -27,42 +27,40 @@ class MyHomePage extends StatefulWidget {
   _GradeCalculatorMainPage createState() => _GradeCalculatorMainPage();
 }
 
-class _GradeCalculatorMainPage extends State<MyHomePage> {
+class _GradeCalculatorMainPage extends State<GradeConverterHomePage> {
   double numberGrade = 0;
   int roundedNumberGrade;
   String letterGrade;
+  int letterid = 0;
+
+  var letters = [
+    "F",
+    "D-",
+    "D",
+    "D+",
+    "C-",
+    "C",
+    "C+",
+    "B-",
+    "B",
+    "B+",
+    "A-",
+    "A",
+    "A+"
+  ];
+  var cutoff = [60, 63, 67, 70, 73, 77, 80, 83, 87, 90, 93, 97];
 
   @override
   Widget build(BuildContext context) {
-    if (0 <= numberGrade && numberGrade <= 59) {
-      letterGrade = "F";
-    } else if (60 <= numberGrade && numberGrade <= 62) {
-      letterGrade = "D-";
-    } else if (63 <= numberGrade && numberGrade <= 66) {
-      letterGrade = "D";
-    } else if (67 <= numberGrade && numberGrade <= 69) {
-      letterGrade = "D+";
-    } else if (70 <= numberGrade && numberGrade <= 72) {
-      letterGrade = "C-";
-    } else if (73 <= numberGrade && numberGrade <= 76) {
-      letterGrade = "C";
-    } else if (77 <= numberGrade && numberGrade <= 79) {
-      letterGrade = "C+";
-    } else if (80 <= numberGrade && numberGrade <= 82) {
-      letterGrade = "B-";
-    } else if (83 <= numberGrade && numberGrade <= 86) {
-      letterGrade = "B";
-    } else if (87 <= numberGrade && numberGrade <= 89) {
-      letterGrade = "B+";
-    } else if (90 <= numberGrade && numberGrade <= 92) {
-      letterGrade = "A-";
-    } else if (93 <= numberGrade && numberGrade <= 96) {
-      letterGrade = "A";
-    } else if (97 <= numberGrade && numberGrade <= 100) {
-      letterGrade = "A+";
-    }
-
     roundedNumberGrade = numberGrade.round();
+
+    String getLetterGrade(numberGrade) {
+      letterid = 0;
+      while (letterid < 12 && numberGrade >= cutoff[letterid]) {
+        letterid++;
+      }
+      return letters[letterid];
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -82,14 +80,13 @@ class _GradeCalculatorMainPage extends State<MyHomePage> {
               },
               min: 0,
               max: 100,
-              label: '$roundedNumberGrade',
             ),
             Text(
               '$roundedNumberGrade',
               style: Theme.of(context).textTheme.headline4,
             ),
             Text("Your letter grade is:"),
-            Text(letterGrade),
+            Text(getLetterGrade(numberGrade)),
           ],
         ),
       ),
