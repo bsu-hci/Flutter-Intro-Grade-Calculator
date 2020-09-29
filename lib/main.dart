@@ -29,6 +29,7 @@ class MyHomePage extends StatefulWidget {
 
 class _GradeCalculatorMainPage extends State<MyHomePage> {
   double numberGrade = 0;
+  int roundedNumberGrade;
   String letterGrade;
 
   @override
@@ -61,6 +62,8 @@ class _GradeCalculatorMainPage extends State<MyHomePage> {
       letterGrade = "A+";
     }
 
+    roundedNumberGrade = numberGrade.round();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -79,11 +82,10 @@ class _GradeCalculatorMainPage extends State<MyHomePage> {
               },
               min: 0,
               max: 100,
-              divisions: 100,
-              label: '$numberGrade',
+              label: '$roundedNumberGrade',
             ),
             Text(
-              '$numberGrade',
+              '$roundedNumberGrade',
               style: Theme.of(context).textTheme.headline4,
             ),
             Text("Your letter grade is:"),
