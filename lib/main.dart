@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'dart:html';
 import 'dart:ui';
 
 void main() {
@@ -137,6 +136,17 @@ class _TriagePageState extends State<TriagePage> {
   ];
   var triageCutoff = [(7 / 15), (2 / 3), (5 / 6), (17 / 18)];
 
+  void validator() {
+    if (double.tryParse(pointsEarnedInput.text) == null ||
+        double.tryParse(pointsPossibleInput.text) == null) {
+      setState(() {
+        letterGrade = "Error: Input must be numeric.";
+      });
+    } else {
+      getLetterEquivalent();
+    }
+  }
+
   void getLetterEquivalent() {
     pointsEarned = double.parse(pointsEarnedInput.text);
     pointsPossible = double.parse(pointsPossibleInput.text);
@@ -192,11 +202,8 @@ class _TriagePageState extends State<TriagePage> {
                       textAlign: TextAlign.center,
                       keyboardType: TextInputType.number,
                       controller: pointsEarnedInput,
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.digitsOnly
-                      ],
                       onChanged: (text) {
-                        getLetterEquivalent();
+                        validator();
                       }),
                 ),
                 Text("/"),
@@ -205,11 +212,8 @@ class _TriagePageState extends State<TriagePage> {
                   textAlign: TextAlign.center,
                   keyboardType: TextInputType.number,
                   controller: pointsPossibleInput,
-                  inputFormatters: <TextInputFormatter>[
-                    FilteringTextInputFormatter.digitsOnly
-                  ],
                   onChanged: (text) {
-                    getLetterEquivalent();
+                    validator();
                   },
                 ))
               ]),
