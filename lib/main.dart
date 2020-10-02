@@ -4,10 +4,6 @@ import 'package:flutter/services.dart';
 import 'dart:html';
 import 'dart:ui';
 
-import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
-
 void main() {
   runApp(GradeConverterApp());
 }
@@ -124,7 +120,6 @@ class TriagePage extends StatefulWidget {
 
 class _TriagePageState extends State<TriagePage> {
   String letterGrade = "";
-  String letterGrade2;
   String userInput;
   double pointsEarned;
   double pointsPossible;
@@ -132,6 +127,7 @@ class _TriagePageState extends State<TriagePage> {
   int letterid = 0;
   var pointsEarnedInput = TextEditingController();
   var pointsPossibleInput = TextEditingController();
+  var formatter = FilteringTextInputFormatter;
 
   var triageLetters = [
     "F",
