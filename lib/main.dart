@@ -136,9 +136,8 @@ class _TriagePageState extends State<TriagePage> {
   ];
   var triageCutoff = [(7 / 15), (2 / 3), (5 / 6), (17 / 18)];
 
-  void validator() {
-    if (double.tryParse(pointsEarnedInput.text) == null ||
-        double.tryParse(pointsPossibleInput.text) == null) {
+  void validator(input) {
+    if (double.tryParse(input) == null) {
       setState(() {
         letterGrade = "Error: Input must be numeric.";
       });
@@ -161,7 +160,7 @@ class _TriagePageState extends State<TriagePage> {
     } else if (pointsEarned != null && pointsPossible != null) {
       singleGradeValue = pointsEarned / pointsPossible;
       letterid = 0;
-      while (letterid < 3 && singleGradeValue >= triageCutoff[letterid]) {
+      while (letterid < 4 && singleGradeValue > triageCutoff[letterid]) {
         letterid++;
       }
       setState(() {
@@ -203,7 +202,7 @@ class _TriagePageState extends State<TriagePage> {
                       keyboardType: TextInputType.number,
                       controller: pointsEarnedInput,
                       onChanged: (text) {
-                        validator();
+                        validator(pointsEarnedInput.text);
                       }),
                 ),
                 Text("/"),
@@ -213,7 +212,7 @@ class _TriagePageState extends State<TriagePage> {
                   keyboardType: TextInputType.number,
                   controller: pointsPossibleInput,
                   onChanged: (text) {
-                    validator();
+                    validator(pointsPossibleInput.text);
                   },
                 ))
               ]),
