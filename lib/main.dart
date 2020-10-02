@@ -127,9 +127,6 @@ class _TriagePageState extends State<TriagePage> {
   int letterid = 0;
   var pointsEarnedInput = TextEditingController();
   var pointsPossibleInput = TextEditingController();
-  var formatter = <TextInputFormatter>[
-    FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))
-  ];
 
   var triageLetters = [
     "F",
@@ -195,7 +192,9 @@ class _TriagePageState extends State<TriagePage> {
                       textAlign: TextAlign.center,
                       keyboardType: TextInputType.number,
                       controller: pointsEarnedInput,
-                      inputFormatters: formatter,
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
                       onChanged: (text) {
                         getLetterEquivalent();
                       }),
@@ -206,7 +205,9 @@ class _TriagePageState extends State<TriagePage> {
                   textAlign: TextAlign.center,
                   keyboardType: TextInputType.number,
                   controller: pointsPossibleInput,
-                  inputFormatters: formatter,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.digitsOnly
+                  ],
                   onChanged: (text) {
                     getLetterEquivalent();
                   },
