@@ -123,7 +123,10 @@ class _GradeCalculatorMainPage extends State<GradeConverterHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
+      body: Container(
+        padding: EdgeInsets.only(
+            left: MediaQuery.of(context).size.width * .1,
+            right: MediaQuery.of(context).size.width * .1),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -157,9 +160,12 @@ class _GradeCalculatorMainPage extends State<GradeConverterHomePage> {
             if (isTriage == false)
               Container(
                   child: Column(children: <Widget>[
-                Text(
-                  'Your score:',
-                  style: TextStyle(fontSize: 30),
+                Padding(
+                  padding: EdgeInsets.only(top: 15, bottom: 15),
+                  child: Text(
+                    'Input your score by using the slider below:',
+                    style: TextStyle(fontSize: 30),
+                  ),
                 ),
                 Slider(
                   value: numberGrade,
@@ -169,19 +175,30 @@ class _GradeCalculatorMainPage extends State<GradeConverterHomePage> {
                   min: 0,
                   max: 100,
                 ),
-                Text(
-                  '$roundedNumberGrade',
-                  style: Theme.of(context).textTheme.headline4,
+                Padding(
+                  padding: EdgeInsets.only(top: 10, bottom: 10),
+                  child: Text('$roundedNumberGrade',
+                      style: TextStyle(color: Colors.black, fontSize: 50)),
                 ),
-                Text("Your letter grade is:", style: TextStyle(fontSize: 30)),
-                Text(getLetterGradeStandard(numberGrade),
-                    style: TextStyle(fontSize: 30)),
+                Padding(
+                  padding: EdgeInsets.only(top: 10, bottom: 10),
+                  child: Text("Your letter grade is:",
+                      style: TextStyle(fontSize: 30)),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 10),
+                  child: Text(getLetterGradeStandard(numberGrade),
+                      style: TextStyle(fontSize: 50)),
+                ),
               ])),
             if (isTriage == true)
               Container(
                   child: Column(children: <Widget>[
-                Text("Enter points earned and total points possible.",
-                    style: TextStyle(fontSize: 30)),
+                Padding(
+                  padding: EdgeInsets.only(top: 10, bottom: 20),
+                  child: Text("Enter points earned and total points possible.",
+                      style: TextStyle(fontSize: 30)),
+                ),
                 Row(children: [
                   Flexible(
                     child: TextField(
@@ -193,7 +210,10 @@ class _GradeCalculatorMainPage extends State<GradeConverterHomePage> {
                           validator(pointsEarnedInput.text);
                         }),
                   ),
-                  Text("/", style: TextStyle(fontSize: 30)),
+                  Padding(
+                    padding: EdgeInsets.only(left: 40, right: 40),
+                    child: Text("/", style: TextStyle(fontSize: 30)),
+                  ),
                   Flexible(
                       child: TextField(
                     style: TextStyle(fontSize: 30),
@@ -205,13 +225,19 @@ class _GradeCalculatorMainPage extends State<GradeConverterHomePage> {
                     },
                   ))
                 ]),
-                Text(
-                  "Your grade is:",
-                  style: TextStyle(fontSize: 30),
+                Padding(
+                  padding: EdgeInsets.only(top: 25, bottom: 15),
+                  child: Text(
+                    "Your grade is:",
+                    style: TextStyle(fontSize: 30),
+                  ),
                 ),
-                Text(
-                  triageLetterGrade,
-                  style: TextStyle(fontSize: 30),
+                Padding(
+                  padding: EdgeInsets.only(top: 10),
+                  child: Text(
+                    triageLetterGrade,
+                    style: TextStyle(fontSize: 50),
+                  ),
                 ),
               ]))
           ],
