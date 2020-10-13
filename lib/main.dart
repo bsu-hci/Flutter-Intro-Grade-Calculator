@@ -55,7 +55,8 @@ class _GradeCalculatorMainPage extends State<GradeConverterHomePage> {
   void validator(input) {
     if (double.tryParse(input) == null) {
       setState(() {
-        triageLetterGrade = "Error: Input must be numeric.";
+        triageLetterGrade =
+            "Error: Input must be numeric. Try entering input that is only numbers.";
       });
     } else {
       getLetterEquivalent();
@@ -67,12 +68,13 @@ class _GradeCalculatorMainPage extends State<GradeConverterHomePage> {
     pointsPossible = double.parse(pointsPossibleInput.text);
     if (pointsPossible == 0) {
       setState(() {
-        triageLetterGrade = "Error: Points possible cannot be 0.";
+        triageLetterGrade =
+            "Error: Points possible cannot be 0. Try entering a value here greater than 0.";
       });
     } else if (pointsEarned > pointsPossible) {
       setState(() {
         triageLetterGrade =
-            "Error: Points earned cannot exceed points possible.";
+            "Error: Points earned cannot exceed points possible. Try entering a points earned value smaller than points possible value.";
       });
     } else if (pointsEarned != null && pointsPossible != null) {
       singleGradeValue = pointsEarned / pointsPossible;
